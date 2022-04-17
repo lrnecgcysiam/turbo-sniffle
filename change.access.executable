@@ -1,0 +1,4 @@
+# This script will change the file access permission to an EXECUTABLE
+# https://en.wikipedia.org/wiki/Chmod
+
+chmod 755 $1

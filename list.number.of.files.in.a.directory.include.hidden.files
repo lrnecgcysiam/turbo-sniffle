@@ -1,0 +1,4 @@
+## To include hidden files (except . and ..) and avoid problems with newline characters, the canonical way is:
+
+find . ! -name . -prune -print | grep -c /
+

@@ -1,0 +1,6 @@
+# This script will change all files in current
+# directory ending with html extension to
+# php extension. (*.html to *.php), You can 
+# customize it as per your requirment.
+
+for x in *.$1; do mv "$x" "${x%.$1}.$2"; done
