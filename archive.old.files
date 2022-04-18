@@ -1,0 +1,20 @@
+# !/bin/bash
+# 
+# archive.old.files archive old order files
+#
+# Chris K. Samuel 
+# CVS: $Header$
+shopt -s -o nounset
+
+
+# Global Declarations
+
+declare -rx SCRIPT=${0##*/}               # SCRIPT is the name of this SCRIPT   
+declare -rx who="/usr/bin/who"            # the who command - man 1 who
+declare -rx TMP="/tmp/temp.$$"            # TMP is a temporary file
+
+# Sanity Checks
+
+if test ! -x "$who" ; then
+    printf "$SCRIPT:$LINENO: the command $who is not available - aborting" >&2
+    exit 192
