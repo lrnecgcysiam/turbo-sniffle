@@ -1,0 +1,36 @@
+# Arithmetic Expression
+
+## The built-in let command performs math calculations.
+## let expecrts a string containing a variable, an equals string
+## and an expression to calculate.
+
+
+let "SUM=5+5"
+printf "%d" "$SUM" "With dollar prompt"
+printf "%d " "SUM" "Without dollar prompt"
+
+
+let "SUM=SUM+5"
+printf "%d   " "$SUM" "With dollar prompt"
+printf "%d   " "SUM"  "Without dollar prompt"
+
+# How can I remove the percentage when I run Arithmetic operation?
+# unset in bash only unsets a variable if it has been declared in the current scope 
+# (leaves it declared though except in the global scope; it removes attributes 
+# and values and the variable is no longer array or hash; also note that on
+# namerefs, it unsets the referenced variable
+# https://bash.cyberciti.biz/guide/Unset
+
+unset SUM
+declare SUM=0
+SUM=SUM+5
+printf "%s\n" "$SUM"
+# 5 times 2 10 
+
+# Use the quotations around expressions when trying to prevent Bash ZSH from expanding them.
+
+let "RESULT=5 + 2"
+printf "5 plus 2 is  %d\n" "$RESULT"
+# 5 plus 2 is 7
+
+

@@ -1,0 +1,7 @@
+ ## The easiest way to zip a folder on Linux is to use the “zip”
+ ## command with the “-r” option and specify the file of your archive as well as the folders to be added to your zip file.
+ zip -r $1 $2
+~
+~
+~
+~
