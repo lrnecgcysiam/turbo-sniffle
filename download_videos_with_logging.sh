@@ -6,9 +6,21 @@ if ! command -v yt-dlp &> /dev/null; then
     exit 1
 fi
 
-# Define the YouTube channel URL
+# Check if the correct number of arguments are provided
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <YouTube Channel URL> <Log Directory>"
+    exit 1
+fi
+
+# Define the YouTube channel URL and log file path
 CHANNEL_URL="$1"
-LOG_FILE="$2download_video.log"
+LOG_DIR="$2"
+
+# Ensure the log directory exists
+mkdir -p "$LOG_DIR"
+
+# Define the log file path
+LOG_FILE="${LOG_DIR}/download_video.log"
 
 # Function to sanitize filenames
 sanitize_filename() {
