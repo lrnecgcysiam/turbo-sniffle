@@ -15,7 +15,7 @@ const mimeTypes = {
 
 // Function to check if a file is meant for a subdirectory
 const isForSubdirectory = (filename) => {
-    return filename.startsWith('sub_');
+    return filename.startsWith('.');
 };
 
 http.createServer((req, res) => {
