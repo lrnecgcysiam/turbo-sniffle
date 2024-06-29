@@ -13,9 +13,17 @@ const mimeTypes = {
     '.mp4': 'video/mp4'
 };
 
-// Function to check if a file is meant for a subdirectory
+// Function to check if a file is meant for a subdirectory or is a hidden file
 const isForSubdirectory = (filename) => {
     return filename.startsWith('.');
+};
+
+// Function to check if an mp4 file is larger than 1 MB
+const isLargeEnough = (filePath) => {
+    const stats = fs.statSync(filePath);
+    const fileSizeInBytes = stats.size;
+    const oneMegabyteInBytes = 1 * 1024 * 1024; // 1 MB in bytes
+    return fileSizeInBytes >= oneMegabyteInBytes;
 };
 
 http.createServer((req, res) => {
@@ -40,8 +48,21 @@ http.createServer((req, res) => {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.write('<html><body><ul>');
 
-                // Filter out files meant for subdirectories
-                files.filter(file => !isForSubdirectory(file)).forEach(file => {
+                // Filter out files meant for subdirectories or hidden files and small mp4 files
+                files.filter(file => {
+                    const filePath = path.join(fsPath, file);
+                    const extname = path.extname(file);
+
+                    if (isForSubdirectory(file)) {
+                        return false;
+                    }
+
+                    if (extname === '.mp4' && !isLargeEnough(filePath)) {
+                        return false;
+                    }
+
+                    return true;
+                }).forEach(file => {
                     const filePath = path.join(fsPath, file);
                     const fileUrl = path.join(requestUrl.pathname, file);
                     const extname = path.extname(file);
