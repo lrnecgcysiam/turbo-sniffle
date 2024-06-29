@@ -13,6 +13,11 @@ const mimeTypes = {
     '.mp4': 'video/mp4'
 };
 
+// Function to check if a file is meant for a subdirectory
+const isForSubdirectory = (filename) => {
+    return filename.startsWith('sub_');
+};
+
 http.createServer((req, res) => {
     const requestUrl = url.parse(req.url);
     const fsPath = path.join(directory, decodeURI(requestUrl.pathname));
@@ -35,7 +40,8 @@ http.createServer((req, res) => {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.write('<html><body><ul>');
 
-                files.forEach(file => {
+                // Filter out files meant for subdirectories
+                files.filter(file => !isForSubdirectory(file)).forEach(file => {
                     const filePath = path.join(fsPath, file);
                     const fileUrl = path.join(requestUrl.pathname, file);
                     const extname = path.extname(file);
