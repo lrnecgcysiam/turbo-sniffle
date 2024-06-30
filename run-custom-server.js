@@ -85,6 +85,6 @@ http.createServer((req, res) => {
             fs.createReadStream(fsPath).pipe(res);
         }
     });
-}).listen(8080, () => {
-    console.log('Server running at http://127.0.0.1:8080/');
+}).listen(8080, '0.0.0.0',() => {
+    console.log('Server running at http://0.0.0.0:8080/');
 });
